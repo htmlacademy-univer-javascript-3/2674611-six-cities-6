@@ -1,5 +1,8 @@
 import {Offers} from '../../types/offer.ts';
 import OffersList from '../../components/offers-list/offers-list.tsx';
+import Map from '../../components/map/map.tsx';
+import {useState} from 'react';
+import {Point} from '../../types/map.ts';
 
 type MainProps = {
   offersCount: number;
@@ -7,6 +10,7 @@ type MainProps = {
 }
 
 function MainPage({offersCount, offers} : MainProps) : JSX.Element {
+  const [selectedPoint, serSelectedPoint] = useState<Point | null>(null);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -96,10 +100,13 @@ function MainPage({offersCount, offers} : MainProps) : JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers}/>
+              <OffersList offers={offers} onActiveOfferChange={
+                (offer) => serSelectedPoint(offer ? offer.location : null)
+              }
+              />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map points={offers.map((of) => of.location)} selectedPoint={selectedPoint}/>
             </div>
           </div>
         </div>

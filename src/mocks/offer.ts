@@ -1,6 +1,6 @@
-import {Offers} from '../types/offer.ts';
+import { Offers } from '../types/offer.ts';
 
-export const testOffers : Offers = [
+export const testOffers: Offers = [
   {
     id: '1',
     title: 'Beautiful & luxurious apartment at great location',
@@ -10,18 +10,28 @@ export const testOffers : Offers = [
     rating: 4,
     isPremium: true,
     isFavorite: false,
-    previewImage: 'img/apartment-01.jpg'
+    previewImage: 'img/apartment-01.jpg',
+    location: {
+      title: '',
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+    }
   },
   {
     id: '2',
     title: 'Wood and stone place',
-    city: 'Cologne',
+    city: 'Amsterdam',
     type: 'Room',
     price: 80,
     rating: 4,
     isPremium: false,
     isFavorite: true,
-    previewImage: 'img/room.jpg'
+    previewImage: 'img/room.jpg',
+    location: {
+      title: '',
+      lat: 52.3609553943508,
+      lng: 4.85309666406198,
+    }
   },
   {
     id: '3',
@@ -32,7 +42,12 @@ export const testOffers : Offers = [
     rating: 4,
     isPremium: false,
     isFavorite: false,
-    previewImage: 'img/apartment-02.jpg'
+    previewImage: 'img/apartment-02.jpg',
+    location: {
+      title: '',
+      lat: 52.3909553943508,
+      lng: 4.929309666406198,
+    }
   },
   {
     id: '4',
@@ -42,18 +57,12 @@ export const testOffers : Offers = [
     price: 180,
     rating: 5,
     isPremium: true,
-    isFavorite: false,
-    previewImage: 'img/apartment-03.jpg'
-  },
-  {
-    id: '5',
-    title: 'Wood and stone place',
-    city: 'Amsterdam',
-    type: 'Room',
-    price: 80,
-    rating: 4,
-    isPremium: false,
     isFavorite: true,
-    previewImage: 'img/room.jpg'
+    previewImage: 'img/apartment-03.jpg',
+    location: {
+      title: '',
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
+    }
   }
 ];

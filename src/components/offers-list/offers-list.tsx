@@ -1,19 +1,18 @@
 import OfferCard from '../offer-card/offer-card.tsx';
 import {Offer, Offers} from '../../types/offer.ts';
-import {useState} from 'react';
 
 type OffersListProps = {
   offers: Offers;
+  onActiveOfferChange: (offer: Offer | null) => void;
 }
 
-function OffersList({ offers }: OffersListProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
+function OffersList({ offers, onActiveOfferChange }: OffersListProps): JSX.Element {
   const handleMouseEnter = (offer: Offer) => {
-    setActiveOffer(offer);
+    onActiveOfferChange(offer);
   };
 
   const handleMouseLeave = () => {
-    setActiveOffer(null);
+    onActiveOfferChange(null);
   };
   return (
     <div className={'cities__places-list places__list tabs__content'}>

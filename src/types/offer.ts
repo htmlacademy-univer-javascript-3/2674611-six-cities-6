@@ -1,3 +1,5 @@
+import {Point} from './map.ts';
+
 export type Offer = {
   id: string;
   title: string;
@@ -8,6 +10,7 @@ export type Offer = {
   isPremium: boolean;
   isFavorite: boolean;
   previewImage: string;
+  location: Point;
 };
 
 export type Offers = Offer[];
