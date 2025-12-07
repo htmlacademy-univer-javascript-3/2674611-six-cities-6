@@ -1,12 +1,12 @@
-import OfferCard from '../offer-card/offer-card.tsx';
-import {Offer, Offers} from '../../types/offer.ts';
+import OfferCard from '../../offer-card/offer-card.tsx';
+import {Offer, Offers} from '../../../types/offer.ts';
 
 type OffersListProps = {
   offers: Offers;
   onActiveOfferChange: (offer: Offer | null) => void;
 }
 
-function OffersList({ offers, onActiveOfferChange }: OffersListProps): JSX.Element {
+function CitiesOffersList({ offers, onActiveOfferChange }: OffersListProps): JSX.Element {
   const handleMouseEnter = (offer: Offer) => {
     onActiveOfferChange(offer);
   };
@@ -20,6 +20,7 @@ function OffersList({ offers, onActiveOfferChange }: OffersListProps): JSX.Eleme
         <OfferCard
           key={offer.id}
           offer={offer}
+          cardType={'cities'}
           onMouseEnter={() => handleMouseEnter(offer)}
           onMouseLeave={handleMouseLeave}
         />
@@ -28,4 +29,4 @@ function OffersList({ offers, onActiveOfferChange }: OffersListProps): JSX.Eleme
   );
 }
 
-export default OffersList;
+export default CitiesOffersList;

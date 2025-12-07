@@ -1,13 +1,14 @@
-import { Offer } from '../../types/offer.ts';
-import OfferCard from '../../components/offer-card/offer-card.tsx';
+import {Offer} from '../../types/offer.ts';
 import ReviewForm from '../../components/review-form/review-form.tsx';
+import Map from '../../components/map/map.tsx';
+import NearPlacesOffersList from '../../components/offers-lists/near-places-offers-list/near-places-offers-list.tsx';
 
 type OfferPageProps = {
   offer: Offer;
   otherOffers: Offer[];
 }
 
-function OfferPage({ offer, otherOffers }: OfferPageProps): JSX.Element {
+function OfferPage({offer, otherOffers}: OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -74,7 +75,10 @@ function OfferPage({ offer, otherOffers }: OfferPageProps): JSX.Element {
                 <h1 className="offer__name">
                   {offer.title}
                 </h1>
-                <button className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`} type="button">
+                <button
+                  className={`offer__bookmark-button button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`}
+                  type="button"
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -199,19 +203,18 @@ function OfferPage({ offer, otherOffers }: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map
+            points={otherOffers.map((of) => of.location)}
+            selectedPoint={null}
+            mapType={'offer'}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {otherOffers.map((otherOffer) => (
-                <OfferCard
-                  key={otherOffer.id}
-                  offer={otherOffer}
-                />
-              ))}
-            </div>
+            <NearPlacesOffersList
+              offers={otherOffers}
+            />
           </section>
         </div>
       </main>

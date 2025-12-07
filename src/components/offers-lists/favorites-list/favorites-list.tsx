@@ -1,5 +1,5 @@
-import {Offers} from '../../types/offer.ts';
-import FavoritesCard from '../favorites-card/favorites-card.tsx';
+import {Offers} from '../../../types/offer.ts';
+import OfferCard from '../../offer-card/offer-card.tsx';
 
 type FavoritesListProps = {
   groupedOffers: Record<string, Offers>;
@@ -19,9 +19,11 @@ function FavoritesList({ groupedOffers }: FavoritesListProps): JSX.Element {
           </div>
           <div className="favorites__places">
             {cityOffers.map((offer) => (
-              <article key={offer.id} className="favorites__card place-card">
-                <FavoritesCard offer={offer} />
-              </article>
+              <OfferCard
+                key={offer.id}
+                offer={offer}
+                cardType={'favorites'}
+              />
             ))}
           </div>
         </li>

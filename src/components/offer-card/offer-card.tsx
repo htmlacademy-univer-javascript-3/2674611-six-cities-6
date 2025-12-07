@@ -3,17 +3,19 @@ import {Offer} from '../../types/offer.ts';
 
 type OfferCardProps = {
   offer: Offer;
+  cardType: 'cities' | 'near-places' | 'favorites';
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 }
 
 function OfferCard(props: OfferCardProps): JSX.Element {
   const offer = props.offer;
+  const cardType = props.cardType;
   const getRatingWidth = (rate: number): string => `${(rate / 5) * 100}%`;
 
   return (
     <article
-      className="cities__card place-card"
+      className={`${cardType}__card place-card`}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
     >
@@ -22,18 +24,18 @@ function OfferCard(props: OfferCardProps): JSX.Element {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width="260"
-            height="200"
+            width={cardType === 'favorites' ? 150 : 260}
+            height={cardType === 'favorites' ? 110 : 200}
             alt="Place image"
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`place-card__info ${cardType === 'favorites' ? 'favorites__card-info' : ''}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>

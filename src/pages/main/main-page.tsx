@@ -1,5 +1,5 @@
 import {Offer, Offers} from '../../types/offer.ts';
-import OffersList from '../../components/offers-list/offers-list.tsx';
+import CitiesOffersList from '../../components/offers-lists/cities-offers-list/cities-offers-list.tsx';
 import Map from '../../components/map/map.tsx';
 import {useState} from 'react';
 import {Point} from '../../types/map.ts';
@@ -93,7 +93,7 @@ function MainPage({offersCount, offers} : MainProps) : JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={filteredOffers} onActiveOfferChange={
+              <CitiesOffersList offers={filteredOffers} onActiveOfferChange={
                 (offer) => serSelectedPoint(offer ? offer.location : null)
               }
               />

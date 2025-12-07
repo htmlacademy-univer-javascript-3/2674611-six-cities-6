@@ -74,7 +74,7 @@ export const testOffers: Offers = [
     rating: 4.8,
     isPremium: true,
     isFavorite: false,
-    previewImage: 'img/apartment-paris-01.jpg',
+    previewImage: '',
     location: {
       title: '',
       lat: 48.856613,
@@ -90,7 +90,7 @@ export const testOffers: Offers = [
     rating: 4.5,
     isPremium: false,
     isFavorite: true,
-    previewImage: 'img/house-cologne-01.jpg',
+    previewImage: '',
     location: {
       title: '',
       lat: 50.937531,
@@ -106,7 +106,7 @@ export const testOffers: Offers = [
     rating: 4.2,
     isPremium: false,
     isFavorite: false,
-    previewImage: 'img/room-brussels-01.jpg',
+    previewImage: '',
     location: {
       title: '',
       lat: 50.846557,
@@ -122,7 +122,7 @@ export const testOffers: Offers = [
     rating: 4.9,
     isPremium: true,
     isFavorite: true,
-    previewImage: 'img/apartment-hamburg-01.jpg',
+    previewImage: '',
     location: {
       title: '',
       lat: 53.548828,
@@ -138,7 +138,7 @@ export const testOffers: Offers = [
     rating: 4.7,
     isPremium: true,
     isFavorite: false,
-    previewImage: 'img/hotel-dusseldorf-01.jpg',
+    previewImage: '',
     location: {
       title: '',
       lat: 51.213270,
