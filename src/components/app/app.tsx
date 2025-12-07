@@ -6,12 +6,12 @@ import FavoritesPage from '../../pages/favorites/favorites-page.tsx';
 import NotFoundPage from '../../pages/not-found/not-found-page.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {useAppSelector} from '../../hooks';
-import {AuthorizationStatus} from '../../const.ts';
+import {AuthorizationStatus, NameSpace} from '../../const.ts';
 import LoadingScreen from '../loading-screen/loading-screen.tsx';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isLoading);
+  const authorizationStatus = useAppSelector((state) => state[NameSpace.User].authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state[NameSpace.Offers].isLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (

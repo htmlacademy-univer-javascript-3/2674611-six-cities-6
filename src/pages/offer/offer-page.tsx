@@ -7,14 +7,15 @@ import {useEffect} from 'react';
 import {fetchNearbyOffers, fetchOfferById} from '../../store/api-actions/offers.ts';
 import LoadingScreen from '../../components/loading-screen/loading-screen.tsx';
 import Header from '../../components/header/header.tsx';
+import {NameSpace} from '../../const.ts';
 
 function OfferPage(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
 
-  const offer = useAppSelector((state) => state.currentOffer);
-  const nearbyOffers = useAppSelector((state) => state.offers);
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const offer = useAppSelector((state) => state[NameSpace.Offers].currentOffer);
+  const nearbyOffers = useAppSelector((state) => state[NameSpace.Offers].offers);
+  const isLoading = useAppSelector((state) => state[NameSpace.Offers].isLoading);
 
   useEffect(() => {
     if (id && (!offer || offer.id !== id)) {

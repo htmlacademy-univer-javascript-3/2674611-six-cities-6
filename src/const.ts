@@ -16,3 +16,9 @@ export enum AuthorizationStatus {
 export const enum APIRoute {
   Login = 'login',
 }
+
+export enum NameSpace {
+  Other = 'OTHER',
+  Offers = 'GAME',
+  User = 'USER',
+}
