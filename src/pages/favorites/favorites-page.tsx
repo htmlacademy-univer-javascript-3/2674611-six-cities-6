@@ -1,18 +1,28 @@
 import {Offers} from '../../types/offer.ts';
 import FavoritesList from '../../components/offers-lists/favorites-list/favorites-list.tsx';
 import Header from '../../components/header/header.tsx';
+import {useMemo} from 'react';
+import {useAppSelector} from '../../hooks';
+import {NameSpace} from '../../const.ts';
 
 function Favorites(): JSX.Element {
-  const offers: Offers = [];
-  const groupedOffers = offers.reduce<Record<string, Offers>>((acc, offer) => {
-    if (!acc[offer.city.name]) {
-      acc[offer.city.name] = [];
-    }
-    acc[offer.city.name].push(offer);
-    return acc;
-  }, {});
+  const allOffers = useAppSelector((state) => state[NameSpace.Offers].offers);
 
-  const hasFavorites = offers.length > 0;
+  const favoriteOffers = useMemo(() =>
+    allOffers.filter((offer) => offer.isFavorite),
+  [allOffers]
+  );
+
+  const groupedOffers = useMemo(() => favoriteOffers.reduce<Record<string, Offers>>((acc, offer) => {
+    const cityName = offer.city.name;
+    if (!acc[cityName]) {
+      acc[cityName] = [];
+    }
+    acc[cityName].push(offer);
+    return acc;
+  }, {}), [favoriteOffers]);
+
+  const hasFavorites = favoriteOffers.length > 0;
 
   return (
     <div className="page">

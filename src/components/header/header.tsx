@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { AuthorizationStatus } from '../../const';
+import {AuthorizationStatus, NameSpace} from '../../const';
 import React from 'react';
-import {logout} from '../../store/action.ts';
+import {logout} from '../../store/user-process/user-process.ts';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector((state) => state[NameSpace.User].authorizationStatus);
+  const userData = useAppSelector((state) => state[NameSpace.User].userData);
   const favoritesCount = useAppSelector((state) =>
-    state.offers.filter((offer) => offer.isFavorite).length
+    state[NameSpace.Offers].offers.filter((offer) => offer.isFavorite).length
   );
 
   const handleLogoutClick = (evt: React.MouseEvent) => {

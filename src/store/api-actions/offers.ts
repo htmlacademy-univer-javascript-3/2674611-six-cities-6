@@ -2,10 +2,9 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {FullOffer, Offers} from '../../types/offer.ts';
 import {AppDispatch, State} from '../../types/state.ts';
-import {setCurrentOffer, setOffers, setOffersLoadingStatus} from '../action.ts';
 
 export const fetchOffers = createAsyncThunk<
-  void,
+  Offers,
   undefined,
   {
     dispatch: AppDispatch;
@@ -13,43 +12,37 @@ export const fetchOffers = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('offers/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersLoadingStatus(true));
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offers>('/offers');
-    dispatch(setOffersLoadingStatus(false));
-    dispatch(setOffers(data));
+    return data;
   });
 
 export const fetchOfferById = createAsyncThunk<
-  void,
+  FullOffer,
   string,
   {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('offers/fetchOffers',
-  async (offerId, {dispatch, extra: api}) => {
-    dispatch(setOffersLoadingStatus(true));
+>('offers/fetchOfferById',
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<FullOffer>(`/offers/${offerId}`);
-    dispatch(setOffersLoadingStatus(false));
-    dispatch(setCurrentOffer(data));
+    return data;
   });
 
 export const fetchNearbyOffers = createAsyncThunk<
-  void,
+  Offers,
   string,
   {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->('offers/fetchOffers',
-  async (offerId, {dispatch, extra: api}) => {
-    dispatch(setOffersLoadingStatus(true));
+>('offers/fetchNearbyOffers',
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<Offers>(`/offers/${offerId}/nearby`);
-    dispatch(setOffersLoadingStatus(false));
-    dispatch(setOffers(data));
+    return data;
   });
 
 

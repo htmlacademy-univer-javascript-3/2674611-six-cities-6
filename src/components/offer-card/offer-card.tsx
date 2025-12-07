@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer.ts';
+import {memo} from 'react';
 
 type OfferCardProps = {
   offer: Offer;
@@ -8,7 +9,7 @@ type OfferCardProps = {
   onMouseLeave?: () => void;
 }
 
-function OfferCard(props: OfferCardProps): JSX.Element {
+function OfferCardComponent(props: OfferCardProps): JSX.Element {
   const offer = props.offer;
   const cardType = props.cardType;
   const getRatingWidth = (rate: number): string => `${(rate / 5) * 100}%`;
@@ -69,5 +70,5 @@ function OfferCard(props: OfferCardProps): JSX.Element {
     </article>
   );
 }
-
+export const OfferCard = memo(OfferCardComponent);
 export default OfferCard;

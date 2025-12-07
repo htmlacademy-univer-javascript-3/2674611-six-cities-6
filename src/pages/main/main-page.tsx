@@ -2,7 +2,7 @@ import {Location, Offer} from '../../types/offer.ts';
 import CitiesOffersList from '../../components/offers-lists/cities-offers-list/cities-offers-list.tsx';
 import Map from '../../components/map/map.tsx';
 import {useState} from 'react';
-import {allCities} from '../../const.ts';
+import {allCities, NameSpace} from '../../const.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeCity} from '../../store/action.ts';
 import Header from '../../components/header/header.tsx';
@@ -13,8 +13,8 @@ function MainPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const currentCity = useAppSelector((state) => state.city);
-  const allOffers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state[NameSpace.Other].city);
+  const allOffers = useAppSelector((state) => state[NameSpace.Offers].offers);
 
   const filteredOffers = allOffers.filter((offer: Offer) => (offer.city.name === currentCity));
   const offersCount = filteredOffers.length;
