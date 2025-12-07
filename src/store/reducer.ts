@@ -1,8 +1,17 @@
 import {createReducer} from '@reduxjs/toolkit';
 
 import {FullOffer, Offers} from '../types/offer.ts';
-import {changeCity, setCurrentOffer, setOffers, setOffersLoadingStatus} from './action.ts';
+import {
+  changeCity, logout,
+  requireAuthorization,
+  setCurrentOffer,
+  setOffers,
+  setOffersLoadingStatus,
+  setUser
+} from './action.ts';
 import {AuthorizationStatus} from '../const.ts';
+import {UserData} from '../types/user-data.ts';
+import {dropToken} from '../services/token.ts';
 
 export interface AppState {
   city: string;
@@ -10,13 +19,14 @@ export interface AppState {
   authorizationStatus: AuthorizationStatus;
   offers: Offers;
   currentOffer?: FullOffer;
+  userData?: UserData;
 }
 
 const initialState: AppState = {
-  city: 'Paris', // город по умолчанию
+  city: 'Paris',
   isLoading: false,
   authorizationStatus: AuthorizationStatus.NoAuth,
-  offers: [], // изначально пустой список
+  offers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -32,6 +42,16 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCurrentOffer, (state, action) => {
       state.currentOffer = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUser, (state, action) => {
+      state.userData = action.payload;
+    })
+    .addCase(logout, (state) => {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+      dropToken();
     });
 });
 

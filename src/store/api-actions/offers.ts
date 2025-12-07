@@ -1,8 +1,8 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {FullOffer, Offers} from '../types/offer.ts';
-import {AppDispatch, State} from '../types/state.ts';
-import {setCurrentOffer, setOffers, setOffersLoadingStatus} from './action.ts';
+import {FullOffer, Offers} from '../../types/offer.ts';
+import {AppDispatch, State} from '../../types/state.ts';
+import {setCurrentOffer, setOffers, setOffersLoadingStatus} from '../action.ts';
 
 export const fetchOffers = createAsyncThunk<
   void,
@@ -51,3 +51,5 @@ export const fetchNearbyOffers = createAsyncThunk<
     dispatch(setOffersLoadingStatus(false));
     dispatch(setOffers(data));
   });
+
+
