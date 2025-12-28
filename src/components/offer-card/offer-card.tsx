@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer.ts';
 import {memo} from 'react';
+import {getRatingWidth} from "../../services/utils.ts";
 
 type OfferCardProps = {
   offer: Offer;
@@ -12,7 +13,6 @@ type OfferCardProps = {
 function OfferCardComponent(props: OfferCardProps): JSX.Element {
   const offer = props.offer;
   const cardType = props.cardType;
-  const getRatingWidth = (rate: number): string => `${(rate / 5) * 100}%`;
 
   return (
     <article
