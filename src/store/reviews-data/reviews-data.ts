@@ -1,7 +1,7 @@
 import {Review} from '../../types/review.ts';
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const.ts';
-import {fetchReviews} from '../api-actions/review.ts';
+import {fetchReviews, sendReview} from '../api-actions/review.ts';
 
 
 type ReviewsDataState = {
@@ -29,6 +29,9 @@ export const reviewsData = createSlice({
       })
       .addCase(fetchReviews.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(sendReview.fulfilled, (state, action) => {
+        state.reviews.push(action.payload);
       });
   },
 });

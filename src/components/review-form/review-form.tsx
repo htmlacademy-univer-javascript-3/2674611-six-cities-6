@@ -1,6 +1,6 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useAppDispatch} from '../../hooks';
-import {fetchReviews, sendReview} from '../../store/api-actions/review.ts';
+import {sendReview} from '../../store/api-actions/review.ts';
 
 type ReviewFormProps = {
   offerId: string;
@@ -37,7 +37,6 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
       comment: formData.comment
     }));
     setFormData({ rating: 0, comment: '' });
-    dispatch(fetchReviews(offerId));
   };
 
   const isFormValid = formData.rating > 0 && formData.comment.length >= 50;
