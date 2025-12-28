@@ -1,4 +1,3 @@
-// store/user-process/user-process.slice.ts
 import {createSlice} from '@reduxjs/toolkit';
 import {AuthorizationStatus, NameSpace} from '../../const';
 import {UserData} from '../../types/user-data';
@@ -32,6 +31,7 @@ export const userProcess = createSlice({
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(checkAuthAction.rejected, (state) => {
+        state.userData = null;
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
@@ -39,6 +39,7 @@ export const userProcess = createSlice({
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(loginAction.rejected, (state) => {
+        state.userData = null;
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
   },

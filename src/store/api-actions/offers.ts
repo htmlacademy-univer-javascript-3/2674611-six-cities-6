@@ -2,6 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {FullOffer, Offers} from '../../types/offer.ts';
 import {AppDispatch, State} from '../../types/state.ts';
+import {APIRoute} from '../../const.ts';
 
 export const fetchOffers = createAsyncThunk<
   Offers,
@@ -27,7 +28,7 @@ export const fetchOfferById = createAsyncThunk<
   }
 >('offers/fetchOfferById',
   async (offerId, {extra: api}) => {
-    const {data} = await api.get<FullOffer>(`/offers/${offerId}`);
+    const {data} = await api.get<FullOffer>(`${APIRoute.Offers}/${offerId}`);
     return data;
   });
 
@@ -41,7 +42,7 @@ export const fetchNearbyOffers = createAsyncThunk<
   }
 >('offers/fetchNearbyOffers',
   async (offerId, {extra: api}) => {
-    const {data} = await api.get<Offers>(`/offers/${offerId}/nearby`);
+    const {data} = await api.get<Offers>(`${APIRoute.Offers}/${offerId}/nearby`);
     return data;
   });
 

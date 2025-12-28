@@ -15,11 +15,13 @@ export enum AuthorizationStatus {
 
 export const enum APIRoute {
   Login = 'login',
+  Offers = 'offers',
+  Comments = 'comments',
 }
 
 export enum NameSpace {
   Other = 'OTHER',
-  Offers = 'GAME',
+  Offers = 'OFFERS',
   Reviews = 'REVIEWS',
   User = 'USER',
 }

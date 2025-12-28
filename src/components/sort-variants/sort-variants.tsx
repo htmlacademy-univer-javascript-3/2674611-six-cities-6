@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type SortingProps = {
   sortNames: string[];
-  onSortChange: (sortName: string) => void; // <-- передаем только имя сортировки
+  onSortChange: (sortName: string) => void;
 };
 
 function SortVariants({ sortNames, onSortChange }: SortingProps): JSX.Element {
