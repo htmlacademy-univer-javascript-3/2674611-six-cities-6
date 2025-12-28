@@ -10,7 +10,7 @@ import Header from '../../components/header/header.tsx';
 import {AuthorizationStatus, NameSpace} from '../../const.ts';
 import ReviewList from '../../components/review-list/review-list.tsx';
 import {fetchReviews} from '../../store/api-actions/review.ts';
-import NotFoundPage from "../not-found/not-found-page.tsx";
+import NotFoundPage from '../not-found/not-found-page.tsx';
 
 function OfferPage(): JSX.Element {
   const {id} = useParams();
