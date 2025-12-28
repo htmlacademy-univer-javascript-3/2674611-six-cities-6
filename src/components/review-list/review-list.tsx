@@ -1,5 +1,5 @@
 import {Review} from '../../types/review.ts';
-import ReviewCard from '../review/reviewCard.tsx';
+import ReviewCard from '../review/review-card.tsx';
 
 type ReviewListProps = {
   reviews: Review[];
