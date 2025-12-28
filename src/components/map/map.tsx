@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 import leaflet, {layerGroup, Marker} from 'leaflet';
 import {useEffect, useRef} from 'react';
-import useMap from '../../hooks/useMap.ts';
+import useMap from '../../hooks/use-map.ts';
 import {Location} from '../../types/offer.ts';
 
 type MapProps = {
