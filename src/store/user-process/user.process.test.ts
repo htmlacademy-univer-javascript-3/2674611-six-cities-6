@@ -155,5 +155,4 @@ describe('UserProcess Slice', () => {
       });
     });
   });
-
 });

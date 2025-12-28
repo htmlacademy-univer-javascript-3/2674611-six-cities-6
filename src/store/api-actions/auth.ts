@@ -4,6 +4,7 @@ import {AxiosInstance} from 'axios';
 import {AuthData} from '../../types/auth-data.ts';
 import {UserData} from '../../types/user-data.ts';
 import {saveToken} from '../../services/token.ts';
+import {APIRoute} from '../../const.ts';
 
 export const checkAuthAction = createAsyncThunk<UserData | null, undefined, {
   dispatch: AppDispatch;
@@ -12,7 +13,7 @@ export const checkAuthAction = createAsyncThunk<UserData | null, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<UserData>('/login');
+    const {data} = await api.get<UserData>(APIRoute.Login);
     return {...data, token: undefined};
   },
 );
@@ -24,7 +25,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {extra: api}) => {
-    const {data} = await api.post<UserData>('/login', {email, password});
+    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token!);
     return {...data, token: undefined};
   },

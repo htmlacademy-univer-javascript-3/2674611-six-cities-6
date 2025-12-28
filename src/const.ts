@@ -15,6 +15,8 @@ export enum AuthorizationStatus {
 
 export const enum APIRoute {
   Login = 'login',
+  Offers = 'offers',
+  Comments = 'comments',
 }
 
 export enum NameSpace {
