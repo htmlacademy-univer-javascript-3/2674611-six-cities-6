@@ -8,6 +8,8 @@ import {fetchNearbyOffers, fetchOfferById} from '../../store/api-actions/offers.
 import LoadingScreen from '../../components/loading-screen/loading-screen.tsx';
 import Header from '../../components/header/header.tsx';
 import {NameSpace} from '../../const.ts';
+import ReviewList from '../../components/review-list/review-list.tsx';
+import {fetchReviews} from '../../store/api-actions/review.ts';
 
 function OfferPage(): JSX.Element {
   const {id} = useParams();
@@ -15,7 +17,9 @@ function OfferPage(): JSX.Element {
 
   const offer = useAppSelector((state) => state[NameSpace.Offers].currentOffer);
   const nearbyOffers = useAppSelector((state) => state[NameSpace.Offers].offers);
-  const isLoading = useAppSelector((state) => state[NameSpace.Offers].isLoading);
+  const isOfferLoading = useAppSelector((state) => state[NameSpace.Offers].isLoading);
+
+  const reviews = useAppSelector((state) => state[NameSpace.Reviews].reviews);
 
   useEffect(() => {
     if (id && (!offer || offer.id !== id)) {
@@ -25,8 +29,13 @@ function OfferPage(): JSX.Element {
     }
   }, [dispatch, id]);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchReviews(id));
+    }
+  }, [dispatch, id]);
 
-  if (isLoading) {
+  if (isOfferLoading) {
     return <LoadingScreen/>;
   }
 
@@ -83,10 +92,10 @@ function OfferPage(): JSX.Element {
                   {offer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {offer.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
@@ -96,94 +105,40 @@ function OfferPage(): JSX.Element {
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="offer__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Towels
-                  </li>
-                  <li className="offer__inside-item">
-                    Heating
-                  </li>
-                  <li className="offer__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="offer__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="offer__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="offer__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="offer__inside-item">
-                    Fridge
-                  </li>
+                  {offer.goods.map((good) => (
+                    <li className="offer__inside-item" key={good}>
+                      {good}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74"
+                  <div className={`offer__avatar-wrapper
+                  ${offer.host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}
+                  >
+                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {offer.host.name}
                   </span>
                   <span className="offer__user-status">
-                    Pro
+                    {offer.host.isPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                    building is green and from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where
-                    the bustle of the city comes to rest in this alley flowery and colorful.
+                    {offer.description}
                   </p>
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54"
-                          alt="Reviews avatar"
-                        />
-                      </div>
-                      <span className="reviews__user-name">
-                        Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                        The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
-                <ReviewForm/>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewList reviews={reviews}/>
+                <ReviewForm offerId={id!}/>
               </section>
             </div>
           </div>
